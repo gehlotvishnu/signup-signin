@@ -1,0 +1,14 @@
+{
+  "name": "signup-signin",
+  "version": "1.0.0",
+  "description": "signup-signin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "vishnu",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
