@@ -6,6 +6,7 @@ import Signup from "./components/Signup.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MasterBeforeLogin from "./components/MasterBeforeLogin.jsx";
 import "./main.css";
+import MasterAfterLogin from "./components/MasterAfterLogin.jsx";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup />,
+  },
+  {
+    path: "/auth/home",
+    element: <MasterAfterLogin />,
   },
 ]);
 

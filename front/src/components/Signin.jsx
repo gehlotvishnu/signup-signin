@@ -1,5 +1,6 @@
 import { useRef } from "react";
-
+import { login } from "../server/user.js";
+import { useNavigate } from "react-router-dom";
 /*
   This example requires some changes to your config:
   
@@ -14,11 +15,32 @@ import { useRef } from "react";
   }
   ```
 */
-function handleSigninClick(email, password) {}
 
 export default function Signin() {
   const email = useRef("");
   const password = useRef("");
+  const navigate = useNavigate();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    console.log(
+      "Signin.jsx_handleSubmit---",
+      email.current.value,
+      password.current.value
+    );
+
+    login(email.current.value, password.current.value)
+      .then(() => {
+        // 👇️ redirect to /contacts
+        navigate("/contacts");
+      })
+      .catch((error) => {
+        console.log("Error", error);
+        //that.setState({ error, loading: false });
+      });
+  };
+
   return (
     <>
       {/*
@@ -42,7 +64,7 @@ export default function Signin() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6">
             <div>
               <label
                 htmlFor="email"
@@ -95,9 +117,10 @@ export default function Signin() {
 
             <div>
               <button
+                id="btn_signin"
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                onClick={handleSigninClick(email, password)}
+                onClick={handleSubmit}
               >
                 Sign in
               </button>

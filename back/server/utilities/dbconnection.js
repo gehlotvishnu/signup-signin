@@ -1,9 +1,15 @@
 // This will be in some JSON config we'll say
-const dbOptions = {
+/*const dbOptions = {
   host: "localhost",
   user: "root",
   password: "vkg3211",
   database: "socialmedia",
+};*/
+const dbOptions = {
+  host: process.env.DBHOST,
+  user: process.env.DBUSER,
+  password: process.env.DBPASSWORD,
+  database: process.env.DBNAME,
 };
 
 //////////////////////////////////MYSQL LIB//////////////////////////////////////////////////////////////////////
