@@ -17,7 +17,7 @@ app.use(express.json());
 
 //import all the routers
 //const userRouter = require("./server/routes/users.js");
-const authRouter = require("./server/routes/auth.js");
+const authRouter = require("./server/routes/authRouter");
 
 app.use(cors());
 app.use(helmet());

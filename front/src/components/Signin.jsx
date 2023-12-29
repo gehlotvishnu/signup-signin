@@ -32,8 +32,8 @@ export default function Signin() {
 
     login(email.current.value, password.current.value)
       .then(() => {
-        // 👇️ redirect to /contacts
-        navigate("/contacts");
+        // 👇️ redirect to //authenticated home page
+        navigate("/auth/home");
       })
       .catch((error) => {
         console.log("Error", error);

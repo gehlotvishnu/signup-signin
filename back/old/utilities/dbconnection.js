@@ -1,16 +1,16 @@
 // This will be in some JSON config we'll say
-const dbOptions = {
+/*const dbOptions = {
   host: "localhost",
-  user: "vishnu",
-  password: "vishnu",
+  user: "root",
+  password: "vkg3211",
   database: "socialmedia",
-}; /*
+};*/
 const dbOptions = {
   host: process.env.DBHOST,
   user: process.env.DBUSER,
   password: process.env.DBPASSWORD,
   database: process.env.DBNAME,
-};*/
+};
 
 //////////////////////////////////MYSQL LIB//////////////////////////////////////////////////////////////////////
 /*
@@ -48,8 +48,7 @@ connectionPool.getConnection((err, connection) => {
 
 //////////////////////////////////MYSQL2 LIB//////////////////////////////////////////////////////////////////////
 
-//const MySQL = require("mysql2");
-const MySQL = require("mysql2/promise");
+const MySQL = require("mysql2");
 let connectionPool = MySQL.createPool({
   host: dbOptions.host,
   user: dbOptions.user,

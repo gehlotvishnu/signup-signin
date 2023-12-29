@@ -9,8 +9,8 @@ export const login = function (username, password) {
         if (user) {
           // store user details and basic auth credentials in local storage
           // to keep user logged in between page refreshes
-
-          user.authdata = window.btoa(username + ":" + password);
+          console.log(user);
+          //user.authdata = window.btoa(username + ":" + password);
           localStorage.setItem("vkg", JSON.stringify(user));
           resolve();
         }
