@@ -1,5 +1,4 @@
 const connectionPool = require("../utilities/dbconnection.js");
-const bcrypt = require("bcrypt");
 
 class UserService {
   static async GetUserDetailsByUsername(username) {
@@ -10,13 +9,13 @@ class UserService {
       );
       if (rows.length > 0) {
         return {
-          user_id: rows["user_id"],
-          username: rows["username"],
-          password: rows["password"],
-          firstname: rows["firstname"],
-          lastname: rows["lastname"],
-          email: rows["email"],
-          mobile: rows["mobile"],
+          user_id: rows[0].user_id,
+          username: rows[0].username,
+          password: rows[0].password,
+          firstname: rows[0].firstname,
+          lastname: rows[0].lastname,
+          email: rows[0].email,
+          mobile: rows[0].mobile,
         };
       }
       return;
@@ -34,13 +33,13 @@ class UserService {
       console.log(rows, fields);
       if (rows.length > 0) {
         return {
-          user_id: rows["user_id"],
-          username: rows["username"],
-          password: rows["password"],
-          firstname: rows["firstname"],
-          lastname: rows["lastname"],
-          email: rows["email"],
-          mobile: rows["mobile"],
+          user_id: rows[0].user_id,
+          username: rows[0].username,
+          password: rows[0].password,
+          firstname: rows[0].firstname,
+          lastname: rows[0].lastname,
+          email: rows[0].email,
+          mobile: rows[0].mobile,
         };
       }
       return;
@@ -51,6 +50,7 @@ class UserService {
 
   static async CreateUser(user) {
     try {
+      console.log(user);
       const [rows, fields] = await connectionPool.query(
         "INSERT into users(username,password,firstname,lastname,email,mobile)values(?,?,?,?,?,?)",
         [
@@ -76,6 +76,8 @@ class UserService {
 }
 
 module.exports = UserService;
+
+/*
 const user = {
   username: "jai",
   password: "shree ram",
@@ -84,4 +86,4 @@ const user = {
   email: "sggfhsg@gmail.com",
   mobile: "1234567890",
 };
-UserService.CreateUser(user);
+UserService.CreateUser(user);*/

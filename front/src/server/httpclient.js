@@ -8,7 +8,6 @@ let host = "http://192.168.29.191:5000/";
 
 export const postData = function (uri, data) {
   return new Promise(function (resolve, reject) {
-    console.log("httpclient.js----", host, uri, data);
     axios(host + uri, {
       method: "POST",
       data: data,

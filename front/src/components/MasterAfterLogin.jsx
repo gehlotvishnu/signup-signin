@@ -1,10 +1,13 @@
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { logout } from "../server/user";
+import { useNavigate } from "react-router-dom";
 
 const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
+  { name: "Home", href: "/auth/home", current: true },
+  { name: "Dashboard", href: "/auth/dashboard", current: false },
+  { name: "Team", href: "/auth/team", current: false },
   { name: "Projects", href: "#", current: false },
   { name: "Calendar", href: "#", current: false },
 ];
@@ -14,6 +17,12 @@ function classNames(...classes) {
 }
 
 export default function MasterAfterLogin() {
+  const navigate = useNavigate();
+
+  const handleLogoffClick = () => {
+    logout();
+    navigate("/login");
+  };
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -122,7 +131,8 @@ export default function MasterAfterLogin() {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
+                            href=""
+                            onClick={handleLogoffClick}
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"

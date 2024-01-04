@@ -1,42 +1,37 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { login } from "../server/user.js";
 import { useNavigate } from "react-router-dom";
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
 
 export default function Signin() {
   const email = useRef("");
   const password = useRef("");
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log(
-      "Signin.jsx_handleSubmit---",
-      email.current.value,
-      password.current.value
-    );
+    if (email.current.value == "" && password.current.value == "") {
+      setError("Enter Username & Password");
+      return;
+    }
+    if (email.current.value == "") {
+      setError("Enter Username");
+      return;
+    }
+    if (password.current.value == "") {
+      setError("Enter Password");
+      return;
+    }
 
     login(email.current.value, password.current.value)
       .then(() => {
         // 👇️ redirect to //authenticated home page
+        setError("");
         navigate("/auth/home");
       })
       .catch((error) => {
-        console.log("Error", error);
+        setError(error);
         //that.setState({ error, loading: false });
       });
   };
@@ -114,7 +109,35 @@ export default function Signin() {
                 />
               </div>
             </div>
-
+            {error && (
+              <div className="rounded-md bg-red-50 p-4">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <svg
+                      className="h-5 w-5 text-red-400"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 100-12 6 6 0 000 12z"
+                        clipRule="evenodd"
+                      />
+                      <path
+                        fillRule="evenodd"
+                        d="M9 13a1 1 0 112 0v-3a1 1 0 11-2 0v3zm2-7a1 1 0 00-1 1v5a1 1 0 102 0V7a1 1 0 00-1-1z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <div className="ml-3">
+                    <h3 className="text-sm font-medium text-red-800">
+                      {error}
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            )}
             <div>
               <button
                 id="btn_signin"
